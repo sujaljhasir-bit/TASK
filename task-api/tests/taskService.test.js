@@ -163,7 +163,7 @@ describe('completeTask', () => {
     expect(service.completeTask(t.id).priority).toBe('high');
   });
 
-  // BUG 4: completing an already-done task overwrites the original completedAt.
+
   test.failing('is idempotent: re-completing keeps the original completedAt', () => {
     const t = service.create({ title: 'A' });
     const first = service.completeTask(t.id);
