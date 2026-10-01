@@ -8,8 +8,6 @@ const findById = (id) => tasks.find((t) => t.id === id);
 
 const getByStatus = (status) => tasks.filter((t) => t.status.includes(status));
 
-// FIX (BUG 2): pages are 1-indexed in the API (?page=1 is the first page), so the offset must be
-// (page - 1) * limit. The original `page * limit` skipped the entire first page of results.
 const getPaginated = (page, limit) => {
   const offset = (page - 1) * limit;
   return tasks.slice(offset, offset + limit);
@@ -80,8 +78,7 @@ const completeTask = (id) => {
   return updated;
 };
 
-// Stores the (already validated + trimmed) assignee on the task. Returns null if the task is missing.
-// Re-assigning simply overwrites the previous assignee (see README notes for the reasoning).
+
 const assign = (id, assignee) => {
   const index = tasks.findIndex((t) => t.id === id);
   if (index === -1) return null;
