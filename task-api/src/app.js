@@ -13,6 +13,10 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 3000;
 
+app.get('/', (req, res) => {
+  res.send('Backend is running successfully!');
+});
+
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`Task API running on port ${PORT}`);
