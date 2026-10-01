@@ -1,9 +1,4 @@
-/**
- * Integration tests for the HTTP API (Supertest drives the Express app in-process, no port needed).
- *
- * `test.failing` marks a KNOWN BUG: the test asserts the correct behaviour and is expected to fail
- * today. See BUG_REPORT.md. When a bug is fixed, Jest flags the test and the `.failing` can go.
- */
+
 const request = require('supertest');
 const app = require('../src/app');
 const service = require('../src/services/taskService');
