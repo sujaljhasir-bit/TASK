@@ -1,14 +1,4 @@
-/**
- * Unit tests for src/services/taskService.js
- *
- * Convention used in this file:
- *  - Normal `test(...)`      -> behaviour that is correct today.
- *  - `test.failing(...)`     -> a KNOWN BUG. The test asserts the CORRECT behaviour and is
- *                               expected to fail against the current code. Jest reports it as
- *                               passing while the bug exists, and will turn RED once someone
- *                               fixes the bug, which is the cue to delete the `.failing`.
- *                               See BUG_REPORT.md for the full write-up of each one.
- */
+
 const service = require('../src/services/taskService');
 
 beforeEach(() => service._reset());
@@ -21,7 +11,7 @@ describe('create', () => {
       description: '',
       status: 'todo',
       priority: 'medium',
-      dueDate: null,
+        dueDate: null,
       completedAt: null,
       assignee: null,
     });
@@ -177,7 +167,7 @@ describe('completeTask', () => {
   test.failing('is idempotent: re-completing keeps the original completedAt', () => {
     const t = service.create({ title: 'A' });
     const first = service.completeTask(t.id);
-    jest.useFakeTimers().setSystemTime(Date.now() + 60000);
+     jest.useFakeTimers().setSystemTime(Date.now() + 60000);
     const second = service.completeTask(t.id);
     jest.useRealTimers();
     expect(second.completedAt).toBe(first.completedAt);
@@ -188,7 +178,7 @@ describe('assign', () => {
   test('stores the assignee and returns the updated task', () => {
     const t = service.create({ title: 'A' });
     const assigned = service.assign(t.id, 'Alice');
-    expect(assigned.assignee).toBe('Alice');
+     expect(assigned.assignee).toBe('Alice');
     expect(service.findById(t.id).assignee).toBe('Alice');
   });
 
