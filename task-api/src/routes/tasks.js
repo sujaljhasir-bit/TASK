@@ -69,10 +69,7 @@ router.patch('/:id/complete', (req, res) => {
   res.json(task);
 });
 
-// PATCH /tasks/:id/assign  body: { "assignee": "string" }
-// Order of checks: 404 first (does the task exist?), then 400 (is the body valid?).
-// Either order is defensible; checking existence first avoids leaking validation rules for
-// resources that don't exist and matches how PUT behaves in this file's neighbours.
+
 router.patch('/:id/assign', (req, res) => {
   if (!taskService.findById(req.params.id)) {
     return res.status(404).json({ error: 'Task not found' });
