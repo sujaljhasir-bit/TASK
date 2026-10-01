@@ -29,8 +29,7 @@ describe('POST /tasks', () => {
     expect(res.body.error).toEqual(expect.any(String));
   });
 
-  // BUG 8: body-parser throws a 400 error for bad JSON, but the catch-all handler in app.js
-  // ignores err.status and always answers 500.
+ 
   test.failing('malformed JSON returns 400, not 500', async () => {
     const res = await request(app).post('/tasks').set('Content-Type', 'application/json').send('{bad');
     expect(res.status).toBe(400);
@@ -87,7 +86,7 @@ describe('GET /tasks', () => {
       expect(res.body).toEqual([]);
     });
 
-    // BUG 6: nonsense values are not validated (page=-1 -> negative slice offset).
+    
     test.failing('negative page is rejected with 400', async () => {
       const res = await request(app).get('/tasks?page=-1&limit=2');
       expect(res.status).toBe(400);
